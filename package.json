@@ -14,6 +14,7 @@
     "@gluestack-ui/config": "^1.1.5",
     "@gluestack-ui/themed": "latest",
     "@legendapp/motion": "latest",
+    "axios": "^1.7.7",
     "expo": "^51.0.8",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
