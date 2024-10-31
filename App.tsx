@@ -10,16 +10,32 @@ import CardPoke from './src/components/card';
 export default function App() {
 
   const [pokeList, setPokeList] = useState([]);
+  const [pokeListFiltred, setPokeListFiltred] = useState([]);
+  const [search, setSearch] = useState('');
+
+
+  const handleSearch  = (e: string) => {
+    setSearch(e); 
+    if(e === ''){
+      setPokeListFiltred(pokeList)
+    } else{
+      const filteredList = pokeList.filter((pokemon) => pokemon.name.toLowerCase().includes(e.toLowerCase()));
+      setPokeListFiltred(filteredList) 
+  }
+  
+}
 
 
   const fetchPoke = async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=700')
+    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20000')
     .then((json) => {
       setPokeList(json.data.results);
+      setPokeListFiltred(json.data.results)
     })
     .catch((err) => {
       console.log(err)
     })
+
   }
 
   useEffect(() => {
@@ -37,7 +53,7 @@ export default function App() {
           <HStack w={'100%'} backgroundColor='$black' gap={20} alignItems='center' borderBottomLeftRadius={15} borderBottomRightRadius={15} >
             <Text left={10} color='$white' fontSize={30} fontWeight='$semibold' fontFamily='$mono'>Pokedex</Text>
             <Input mr={22} ml={22} w={200} mb={10} mt={10} borderRadius={20} left={10} borderColor='$white'>
-              <InputField placeholder='Pesquise um pokemon' textAlign='center' color='white'/>
+              <InputField placeholder='Pesquise um pokemon' textAlign='center' type='text' color='white' onChangeText={handleSearch} value={search}/>
             </Input>
           </HStack>
 
@@ -46,26 +62,23 @@ export default function App() {
         
         <Box>
 
-          <ScrollView >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView >
+            <Box mt={10} mb={120} alignItems='center' > 
 
+                <FlatList
+                data={pokeListFiltred}
+                keyExtractor={(poke) => poke.name}
+                scrollEnabled={false}
+                renderItem={(item) => {
+                  return <CardPoke url={item.item.url}/>;
+                }}
+                numColumns={2}
+                />
 
-          <Box mt={10} mb={120} alignItems='center' > 
-
-              <FlatList
-              data={pokeList}
-              keyExtractor={(poke: object) => poke.name}
-              scrollEnabled={false}
-              renderItem={(item) => {
-                return <CardPoke url={item.item.url}/>;
-              }}
-              numColumns={2}
-              />
-
-          </Box>
-        
-          </ScrollView>
-      
-
+            </Box>
+            </ScrollView>
+          </TouchableWithoutFeedback>
         </Box>
     </GluestackUIProvider>
   );

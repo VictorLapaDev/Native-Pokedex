@@ -11,8 +11,8 @@ const CardPoke = ({url} : props) => {
 
     const [uniquePoke, setUniquePoke] = useState(null)
 
-    const fetchUniquePoke = (url: string) => {
-        const reponse = axios.get(url)
+    const fetchUniquePoke = async (url: string) => {
+        const reponse = await axios.get(url)
         .then((json) => {
             setUniquePoke(json.data)
         })
@@ -39,9 +39,9 @@ const CardPoke = ({url} : props) => {
             
             <Image  source={{uri: image}} alt={uniquePoke.name} resizeMode="center"/>
 
-            <HStack  bottom={-20}>
-                <Text right={10} color="$white" fontWeight={"$bold"}>{uniquePoke.name}</Text>
-                <Text left={10} color="$white" fontWeight={"$bold"}>{uniquePoke.id}#</Text>
+            <HStack  bottom={-20} gap={10}>
+                <Text right={0} color="$white" fontWeight={"$bold"}>{uniquePoke.name}</Text>
+                <Text left={0} color="$white" fontWeight={"$bold"}>{uniquePoke.id}#</Text>
             </HStack>
 
         </ImageBackground>
