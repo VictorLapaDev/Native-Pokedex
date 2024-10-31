@@ -1,32 +1,62 @@
-This is a [Next.js](https://github.com/expo/expo) + [Gluestack-ui](https://ui.gluestack.io/) project template bootstrapped with [`create-expo-app`](https://docs.expo.dev/get-started/create-a-project/).
+# Native Pokedex
 
-## Getting Started
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) 
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-First, run the development server:
+
+Native Pokedex é um projeto realizado com o intuito de criar um aplicativo mobile que consuma alguma API, dessa forma utilizando diferentes tecnologias para ter êxito, como por exemplo typescript e como a biblioteca gluestack v1 que auxiliou e facilitou a criação do mesmo.
+
+
+# Tópicos
+
+- [Dependências](#dependências)
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Contribuição](#contribuição)
+
+
+## Dependências
+1. NodeJs instalado
+2. Expo app baixado no celular e instalado na máquina
+
+## Instalação
+
+1. Clonar repositório:
 
 ```bash
-# For web
-yarn web
-# For ios
-yarn ios
-# For android
-yarn android
+git clone https://github.com/VictorLapaDev/Native-Pokedex.git
 ```
 
-You can start editing the page by modifying `App.tsx`. The page auto-updates as you edit the file.
+2. Entrar no projeto
 
-This project uses [`@gluestack-ui`](https://ui.gluestack.io/docs/overview/introduction) library that provides optionally styled and accessible components. These components are designed for easy integration into applications developed with React and React Native.
+```bash
+cd Native-Pokedex
+```
+3. Instalar expo
+```bash
+npm install --global expo-cli
+```
 
 
-## Learn More
+4. Instalar dependências:
 
-To learn more about Expo + Gluestack UI template, take a look at the following resources:
+```bash
+npm install
+```
 
-- [Expo Documentation](https://github.com/expo/expo) - learn about Expo features and API.
-- [Gluestack UI Documenatation](https://ui.gluestack.io/docs/overview/introduction) - learn about core concepts and architecture of gluestack-ui.
-- [Gluestack Style Documentaion](https://style.gluestack.io/docs/overview/introduction) - learn about the universal styling library that is used in Gluestack-ui
 
-You can check out:
-- [the gluestack-ui GitHub repository](https://github.com/gluestack/gluestack-ui)
-- [the gluestack-style GitHub repository](https://github.com/gluestack/gluestack-style)
-Your feedback and contributions are welcome!
+## Uso
+  
+1. Inicie o projeto com o comando:
+
+```bash
+npm start
+```
+2. Leia o código qr com o app da expo. Importante!!! Esteja conectado na mesma rede wifi!! 
+
+
+
+## Contribuição
+Projeto realizado com o intuito de praticar habilidades com o consumo de API, e aplicar a framework React-Native. Este projeto foi feito com base na API [PokeApi](https://pokeapi.co/).
+
+Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões de melhorias, abra uma issue ou envie uma pull request ao repositório.
