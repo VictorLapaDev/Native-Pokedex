@@ -1,10 +1,10 @@
 //@ts-nocheck
 
 import { config } from '@gluestack-ui/config';
-import { Box, FlatList, GluestackUIProvider, HStack, Input, InputField, ScrollView, StatusBar, Text } from '@gluestack-ui/themed';
+import { Box, FlatList, GluestackUIProvider, HStack, Image, Input, InputField, ScrollView, StatusBar, Text } from '@gluestack-ui/themed';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
 
 export default function App() {
@@ -12,9 +12,11 @@ export default function App() {
   const [pokeList, setPokeList] = useState([]);
   const [pokeListFiltred, setPokeListFiltred] = useState([]);
   const [search, setSearch] = useState('');
+  const [load, setLoad] = useState(false);
 
 
   const handleSearch  = (e: string) => {
+    setLoad(true)
     setSearch(e); 
     if(e === ''){
       setPokeListFiltred(pokeList)
@@ -22,11 +24,12 @@ export default function App() {
       const filteredList = pokeList.filter((pokemon) => pokemon.name.toLowerCase().includes(e.toLowerCase()));
       setPokeListFiltred(filteredList) 
   }
-  
+    setLoad(false)
 }
 
 
   const fetchPoke = async () => {
+    setLoad(true)
     const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20000')
     .then((json) => {
       setPokeList(json.data.results);
@@ -35,7 +38,7 @@ export default function App() {
     .catch((err) => {
       console.log(err)
     })
-
+    setLoad(false)
   }
 
   useEffect(() => {
@@ -60,26 +63,47 @@ export default function App() {
         </Box>
       </TouchableWithoutFeedback>
         
-        <Box>
+        {load ? (
+
+            <Box w={'100%'} h={'100%'} alignItems='center' justifyContent='center'>
+              <ActivityIndicator color="#000" size="lg" />
+            </Box>
+
+        ) : (
+
+          <Box>
 
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView >
             <Box mt={10} mb={120} alignItems='center' > 
 
-                <FlatList
-                data={pokeListFiltred}
-                keyExtractor={(poke) => poke.name}
-                scrollEnabled={false}
-                renderItem={(item) => {
-                  return <CardPoke url={item.item.url}/>;
-                }}
-                numColumns={2}
-                />
+              {pokeListFiltred.length === 0 ? (
+                <Box alignItems='center' justifyContent='center'>
+                  <Image source={require('./src/assets/erro404.png')} alt='pokenon nao encontrado' width={300} h={300}/>
+                  <Text color='$black' fontWeight='$bold'>Pokemon não encontrado!!</Text>
+                </Box>
+              ) : (
+                 <FlatList
+                 data={pokeListFiltred}
+                 keyExtractor={(poke) => poke.name}
+                 scrollEnabled={false}
+                 renderItem={(item) => {
+                   return <CardPoke url={item.item.url}/>;
+                 }}
+                 numColumns={2}
+                 />
+              )}
+               
 
             </Box>
             </ScrollView>
           </TouchableWithoutFeedback>
         </Box>
+        )}
+        
+        
     </GluestackUIProvider>
   );
 }
+
+
