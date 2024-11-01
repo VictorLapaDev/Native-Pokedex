@@ -1,4 +1,3 @@
-//@ts-nocheck
 
 import { config } from '@gluestack-ui/config';
 import { Box, FlatList, GluestackUIProvider, HStack, Image, Input, InputField, ScrollView, StatusBar, Text } from '@gluestack-ui/themed';
@@ -6,12 +5,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
+import GenMenu from './src/components/GenMenu';
 
 export default function App() {
 
   const [pokeList, setPokeList] = useState([]);
   const [pokeListFiltred, setPokeListFiltred] = useState([]);
   const [search, setSearch] = useState('');
+  const [genPoke, setGenPoke] = useState('limit=151&offset=0')
   const [load, setLoad] = useState(false);
 
 
@@ -30,7 +31,7 @@ export default function App() {
 
   const fetchPoke = async () => {
     setLoad(true)
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20000')
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?${genPoke}`)
     .then((json) => {
       setPokeList(json.data.results);
       setPokeListFiltred(json.data.results)
@@ -59,7 +60,9 @@ export default function App() {
               <InputField placeholder='Pesquise um pokemon' textAlign='center' type='text' color='white' onChangeText={handleSearch} value={search}/>
             </Input>
           </HStack>
-
+          
+          <GenMenu setSelected={setGenPoke} selected={genPoke}/>
+          
         </Box>
       </TouchableWithoutFeedback>
         
@@ -85,7 +88,7 @@ export default function App() {
               ) : (
                  <FlatList
                  data={pokeListFiltred}
-                 keyExtractor={(poke) => poke.name}
+                 keyExtractor={(poke) => poke.url}
                  scrollEnabled={false}
                  renderItem={(item) => {
                    return <CardPoke url={item.item.url}/>;
