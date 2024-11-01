@@ -44,7 +44,7 @@ export default function App() {
 
   useEffect(() => {
     fetchPoke()
-  }, [])
+  }, [genPoke])
 
   return (
     <GluestackUIProvider config={config}>
@@ -54,18 +54,20 @@ export default function App() {
 
           <StatusBar />
 
-          <HStack w={'100%'} backgroundColor='$black' gap={20} alignItems='center' borderBottomLeftRadius={15} borderBottomRightRadius={15} >
-            <Text left={10} color='$white' fontSize={30} fontWeight='$semibold' fontFamily='$mono'>Pokedex</Text>
+          <HStack w={'100%'} backgroundColor='$black' gap={10} alignItems='center' /*borderBottomLeftRadius={15} borderBottomRightRadius={15}*/justifyContent='center' flexDirection='row'>
+            <Text left={5} color='$white' fontSize={25} fontWeight='$semibold' fontFamily='$mono'>Pokedex</Text>
             <Input mr={22} ml={22} w={200} mb={10} mt={10} borderRadius={20} left={10} borderColor='$white'>
               <InputField placeholder='Pesquise um pokemon' textAlign='center' type='text' color='white' onChangeText={handleSearch} value={search}/>
             </Input>
+            <GenMenu setSelected={setGenPoke} selected={genPoke}/>
           </HStack>
           
-          <GenMenu setSelected={setGenPoke} selected={genPoke}/>
+
           
         </Box>
-      </TouchableWithoutFeedback>
+
         
+      </TouchableWithoutFeedback>
         {load ? (
 
             <Box w={'100%'} h={'100%'} alignItems='center' justifyContent='center'>

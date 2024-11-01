@@ -1,8 +1,5 @@
-import { Menu } from '@gluestack-ui/themed';
-import { Text } from "@gluestack-ui/themed";
-import { MenuItemLabel } from "@gluestack-ui/themed"
-import { MenuItem } from "@gluestack-ui/themed"
-import { Button } from "@gluestack-ui/themed"
+import { Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger } from "react-native-popup-menu";
+import { Entypo} from "@expo/vector-icons"
 
 interface props {
     setSelected : (key: string) => void;
@@ -12,64 +9,27 @@ interface props {
 const GenMenu = ({setSelected, selected}: props) => {
     
   return (
-    
-    <Menu 
-    placement="bottom"
-    selectedKeys={selected}
-    onSelectionChange={(keys: object) => {
-        console.log("onSelectionChange", keys)
-        setSelected(keys)
-   }}
+    <MenuProvider style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Menu>
+            <MenuTrigger >
+                <Entypo name="dots-three-vertical" size={20} color='white'/>
+            </MenuTrigger>
 
-    trigger={({ ...triggerProps }) => {
-      return (
-        <Button w={200}{...triggerProps}>
-          <Text>Menu</Text>
-        </Button>
-      )
-    }}>
-
-        <MenuItem key="limit=151&offset=0" textValue="limit=151&offset=0">
-            <MenuItemLabel size="sm">1° Gen</MenuItemLabel>
-        </MenuItem>
-
-        <MenuItem key="limit=100&offset=151" textValue="limit=100&offset=151">
-            <MenuItemLabel size="sm">2° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=135&offset=251" textValue="limit=135&offset=251">
-            <MenuItemLabel size="sm">3° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=107&offset=386" textValue="limit=107&offset=386">
-            <MenuItemLabel size="sm">4° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=156&offset=493" textValue="limit=156&offset=493">
-            <MenuItemLabel size="sm">5° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=72&offset=649" textValue="limit=72&offset=649">
-            <MenuItemLabel size="sm">6° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=88&offset=721" textValue="limit=88&offset=721">
-            <MenuItemLabel size="sm">7° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=96&offset=809" textValue="limit=96&offset=809">
-            <MenuItemLabel size="sm">8° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=120&offset=905" textValue="limit=120&offset=905">
-            <MenuItemLabel size="sm">9° Gen</MenuItemLabel>
-        </MenuItem>
-        
-        <MenuItem key="limit=277&offset=1025" textValue="limit=277&offset=1025">
-            <MenuItemLabel size="sm">Variados</MenuItemLabel>
-        </MenuItem>
-
-    </Menu>
+            <MenuOptions >
+                <MenuOption onSelect={() => setSelected('limit=151&offset=0')} value={selected} text="1º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=100&offset=151')} value={selected} text="2º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=135&offset=251')} value={selected} text="3º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=107&offset=386')} value={selected} text="4º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=156&offset=493')} value={selected} text="5º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=72&offset=649')} value={selected} text="6º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=88&offset=721')} value={selected} text="7º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=96&offset=809')} value={selected} text="8º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=120&offset=905')} value={selected} text="9º Gen"/>
+                <MenuOption onSelect={() => setSelected('limit=277&offset=1025')} value={selected} text="Variados"/>
+            </MenuOptions>
+        </Menu>
+    </MenuProvider>
+  
 
   )
 }
