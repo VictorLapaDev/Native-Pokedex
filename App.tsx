@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
 import GenMenu from './src/components/GenMenu';
+import PokeMenu from './src/components/PokeMenu';
 
 export default function App() {
 
@@ -59,7 +60,7 @@ export default function App() {
             <Input mr={22} ml={22} w={200} mb={10} mt={10} borderRadius={20} left={10} borderColor='$white'>
               <InputField placeholder='Pesquise um pokemon' textAlign='center' type='text' color='white' onChangeText={handleSearch} value={search}/>
             </Input>
-            <GenMenu setSelected={setGenPoke} selected={genPoke}/>
+            <PokeMenu selected={genPoke} setSelected={setGenPoke}/>
           </HStack>
           
 
