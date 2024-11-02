@@ -1,10 +1,13 @@
-import { Box, Center, HStack, Icon, ImageBackground, Modal, ModalCloseButton, ModalContent } from "@gluestack-ui/themed"
+import { Box, Button, Center, HStack, Icon, ImageBackground, Modal, ModalCloseButton, ModalContent } from "@gluestack-ui/themed"
 import { ModalBackdrop } from "@gluestack-ui/themed"
 import { Image } from "@gluestack-ui/themed"
+import { ButtonText } from "@gluestack-ui/themed"
 import { ArrowLeftIcon } from "@gluestack-ui/themed"
 import { Heading } from "@gluestack-ui/themed"
 import { ModalHeader } from "@gluestack-ui/themed"
 import { ModalBody, Text } from "@gluestack-ui/themed"
+import { useState } from "react"
+import { Touchable, TouchableOpacity } from "react-native"
 
 interface props{
     poke: object,
@@ -13,6 +16,8 @@ interface props{
 }
 
 const InfoPoke = ({poke, isModal, setIsModal}: props) => {
+
+    const[shiny, setShiny] = useState(false);
 
     const image = poke.sprites?.other?.['official-artwork']?.front_default;
     const imageShyne = poke.sprites?.other?.['official-artwork']?.front_shiny;
@@ -61,7 +66,7 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
                             <Heading size="lg" color="$white" right={10}>{poke.name}</Heading>
                         </HStack>
 
-                        <Image w={'100%'} h={'90%'} source={{uri: imageShyne}} alt={poke.name} resizeMode="contain" />
+                        <Image w={'100%'} h={'90%'} source={{uri: shiny? imageShyne : image}} alt={poke.name} resizeMode="contain" />
 
                     </ImageBackground>
                 </ModalHeader>
@@ -71,31 +76,36 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
 
                     <ModalBody bgColor={"$white"}>
 
-                        <Text color="$black" fontSize={30}>{poke.id}</Text>
+                        <Text color="$black" fontSize={30}>#{poke.id}</Text>
                         <Text>Altura: {(poke.height)/10} M</Text>       
                         <Text>Peso: {(poke.weight)/10} kg</Text>         
 
-                        <Box>
+                        <Box mt={10}>
                             <Text>Type:</Text>
                             <HStack mt={5}>
                                     {poke.types.map((type: object, index) => { 
-                                        
                                         const tipo = type.type.name;
                                         const bgTipo = typeColors[tipo] || 'gray';
-
                                         return(
-
-                                        <Center key={index} w={80} borderRadius={10}  ml={3} bgColor={bgTipo}>
-                                            <Text  padding={10} color="white" fontWeight="$bold" >
-                                                {tipo}
-                                            </Text>
-                                        </Center>
-                                    )
-                                }
-
-                                )}
+                                            <Center key={index} w={80} borderRadius={10}  ml={3} bgColor={bgTipo}>
+                                                <Text  padding={10} color="white" fontWeight="$bold" >
+                                                    {tipo}
+                                                </Text>
+                                            </Center>
+                                        )
+                                        }
+                                    )}
                             </HStack>
                         </Box>  
+                        
+                        <Box mt={10}>
+                            <Text color="black">Cheque o pokemon shiny</Text>
+                            <TouchableOpacity  onPress={() => setShiny(prevShiny => !prevShiny)} >
+                                <Center mt={5} w={80} bgColor={shiny ? 'black' : '$warmGray300'} borderColor={shiny ? '$warmGray300' : 'black'} borderWidth={2} borderRadius={10}>  
+                                    <Text padding={10} color={shiny ? '$warmGray300' : 'black'}>{shiny ? 'Shiny' : 'Normal'}</Text>
+                                </Center>
+                            </TouchableOpacity>
+                        </Box>
 
                     </ModalBody>
                 
