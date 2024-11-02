@@ -1,4 +1,4 @@
-import { HStack, Icon, ImageBackground, Modal, ModalCloseButton, ModalContent } from "@gluestack-ui/themed"
+import { Box, Center, HStack, Icon, ImageBackground, Modal, ModalCloseButton, ModalContent } from "@gluestack-ui/themed"
 import { ModalBackdrop } from "@gluestack-ui/themed"
 import { Image } from "@gluestack-ui/themed"
 import { ArrowLeftIcon } from "@gluestack-ui/themed"
@@ -16,6 +16,27 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
 
     const image = poke.sprites?.other?.['official-artwork']?.front_default;
     const imageShyne = poke.sprites?.other?.['official-artwork']?.front_shiny;
+
+    const typeColors = {
+        normal: "#A8A878",
+        fighting: "#C03028",
+        flying: "#A890F0",
+        poison: "#A040B0",
+        ground: "#E0C068",
+        rock: "#B8A038",
+        bug: "#A8B820",
+        ghost: "#705898",
+        steel: "#B8B8D0",
+        fire: "#F08030",
+        water: "#6890F0",
+        grass: "#78C850",
+        electric: "#F8D030",
+        psychic: "#F85888",
+        ice: "#98D8D8",
+        dragon: "#7038F8",
+        dark: "#705848",
+        fairy: "#F0B6B6"
+    }
 
 
   return (
@@ -49,7 +70,33 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
 
 
                     <ModalBody bgColor={"$white"}>
+
                         <Text color="$black" fontSize={30}>{poke.id}</Text>
+                        <Text>Altura: {(poke.height)/10} M</Text>       
+                        <Text>Peso: {(poke.weight)/10} kg</Text>         
+
+                        <Box>
+                            <Text>Type:</Text>
+                            <HStack mt={5}>
+                                    {poke.types.map((type: object, index) => { 
+                                        
+                                        const tipo = type.type.name;
+                                        const bgTipo = typeColors[tipo] || 'gray';
+
+                                        return(
+
+                                        <Center key={index} w={80} borderRadius={10}  ml={3} bgColor={bgTipo}>
+                                            <Text  padding={10} color="white" fontWeight="$bold" >
+                                                {tipo}
+                                            </Text>
+                                        </Center>
+                                    )
+                                }
+
+                                )}
+                            </HStack>
+                        </Box>  
+
                     </ModalBody>
                 
 
