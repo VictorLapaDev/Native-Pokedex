@@ -1,4 +1,3 @@
-//@ts-nocheck
 
 import { config } from '@gluestack-ui/config';
 import { Box, FlatList, GluestackUIProvider, HStack, Image, Input, InputField, ScrollView, StatusBar, Text } from '@gluestack-ui/themed';
@@ -6,12 +5,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
+import GenMenu from './src/components/GenMenu';
+import PokeMenu from './src/components/PokeMenu';
 
 export default function App() {
 
   const [pokeList, setPokeList] = useState([]);
   const [pokeListFiltred, setPokeListFiltred] = useState([]);
   const [search, setSearch] = useState('');
+  const [genPoke, setGenPoke] = useState('limit=151&offset=0')
   const [load, setLoad] = useState(false);
 
 
@@ -30,7 +32,7 @@ export default function App() {
 
   const fetchPoke = async () => {
     setLoad(true)
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20000')
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?${genPoke}`)
     .then((json) => {
       setPokeList(json.data.results);
       setPokeListFiltred(json.data.results)
@@ -43,7 +45,7 @@ export default function App() {
 
   useEffect(() => {
     fetchPoke()
-  }, [])
+  }, [genPoke])
 
   return (
     <GluestackUIProvider config={config}>
@@ -53,16 +55,20 @@ export default function App() {
 
           <StatusBar />
 
-          <HStack w={'100%'} backgroundColor='$black' gap={20} alignItems='center' borderBottomLeftRadius={15} borderBottomRightRadius={15} >
-            <Text left={10} color='$white' fontSize={30} fontWeight='$semibold' fontFamily='$mono'>Pokedex</Text>
+          <HStack w={'100%'} backgroundColor='$black' gap={10} alignItems='center' /*borderBottomLeftRadius={15} borderBottomRightRadius={15}*/justifyContent='center' flexDirection='row'>
+            <Text left={5} color='$white' fontSize={25} fontWeight='$semibold' fontFamily='$mono'>Pokedex</Text>
             <Input mr={22} ml={22} w={200} mb={10} mt={10} borderRadius={20} left={10} borderColor='$white'>
               <InputField placeholder='Pesquise um pokemon' textAlign='center' type='text' color='white' onChangeText={handleSearch} value={search}/>
             </Input>
+            <PokeMenu selected={genPoke} setSelected={setGenPoke}/>
           </HStack>
+          
 
+          
         </Box>
-      </TouchableWithoutFeedback>
+
         
+      </TouchableWithoutFeedback>
         {load ? (
 
             <Box w={'100%'} h={'100%'} alignItems='center' justifyContent='center'>
@@ -85,7 +91,7 @@ export default function App() {
               ) : (
                  <FlatList
                  data={pokeListFiltred}
-                 keyExtractor={(poke) => poke.name}
+                 keyExtractor={(poke) => poke.url}
                  scrollEnabled={false}
                  renderItem={(item) => {
                    return <CardPoke url={item.item.url}/>;
