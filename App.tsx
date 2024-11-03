@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
-import GenMenu from './src/components/GenMenu';
 import PokeMenu from './src/components/PokeMenu';
 
 export default function App() {
