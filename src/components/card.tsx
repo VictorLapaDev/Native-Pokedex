@@ -47,7 +47,7 @@ const CardPoke = ({url} : props) => {
                 <Box w={190} h={175} bgColor="#a6a6a6"  mr={3} ml={3} mt={10} mb={10} borderRadius={20} overflow="hidden">
                     <ImageBackground borderRadius={20} source={require('../assets/pokeballFundo.jpg')} w={'100%'} h={'100%'} alignItems="center" justifyContent="center" flexDirection="column">
                         
-                        <Image  source={{uri: image}} alt={uniquePoke.name} resizeMode="center"/>
+                        <Image  source={image ? { uri: image } : require('../assets/erro404.png')} alt={uniquePoke.name} resizeMode="center"/>
 
                         <HStack  bottom={-20} gap={10}>
                             <Text right={0} color="$white" fontWeight={"$bold"}>{uniquePoke.name}</Text>
