@@ -151,21 +151,20 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
                                 const barColor = statsColor[statName] || 'black'
 
                                 return(
-                                    <HStack gap={20} mb={10} key={index}>
-                                        <Text left={0}>{statName}</Text>
-
-                                        <HStack w={300} right={0} bgColor="white" borderRadius={10}>
-                                            <Box w={baseStat} bgColor={barColor} alignItems="flex-end" justifyContent="center" borderRadius={10} >
-                                                 {baseStat >= 45 ? <Text right={2} fontSize={12} color="white">{baseStat}/300</Text> : ''}
+                                    <HStack gap={20} mb={10} key={index} w="90%" justifyContent="space-between">
+                                        <Text flex={1} textAlign="left">{statName}</Text>
+                                  
+                                        <HStack flex={4} bgColor="white" borderRadius={10} overflow="hidden">
+                                            <Box flex={baseStat / 300} bgColor={barColor} alignItems="flex-end" justifyContent="center" borderRadius={10}>
+                                                {baseStat >= 60 ? <Text right={2} fontSize={12} color="white">{baseStat}/300</Text> : ''}
                                             </Box>
-                                            <Box w={BarUncolor} bgColor="white" justifyContent="center" alignItems="flex-start" borderTopRightRadius={10} borderBottomRightRadius={10}>
-                                            {baseStat < 45 ? <Text left={2} fontSize={12} color="black">{baseStat}/300</Text> : ''}
+
+                                            <Box flex={(300 - baseStat) / 300} bgColor="white" justifyContent="center" alignItems="flex-start" borderTopRightRadius={10} borderBottomRightRadius={10}>
+                                                {baseStat < 60 ? <Text left={2} fontSize={12} color="black">{baseStat}/300</Text> : ''}
                                             </Box>
                                         </HStack>
-                                        
-                                            
-                            
-                                    </HStack>
+                                  </HStack>
+                                  
                                 )
                                 
                             })}
