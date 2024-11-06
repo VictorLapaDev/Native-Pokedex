@@ -4,6 +4,19 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 
+<p align="center" >
+  <img src="./assets/Home.jpeg" width="150" style="margin: 0 20px;"/>
+  <img src="./assets/GenMenu.jpeg" width="150" style="margin: 0 20px;"/>
+  <img src="./assets/Search.jpeg" width="150" style="margin: 0 20px;"/>
+</p>
+
+<p align="center">
+    <img src="./assets/NotFound.jpeg" width="150" style="margin: 0 20px;"/>
+    <img src="./assets/InfoPoke.jpeg" width="150" style="margin: 0 20px;"/>
+    <img src="./assets/InfoShiny.jpeg" width="150" style="margin: 0 20px;" />
+</p>
+
+
 Native Pokedex é um projeto realizado com o intuito de criar um aplicativo mobile que consuma alguma API, dessa forma utilizando diferentes tecnologias para ter êxito, como por exemplo typescript e como a biblioteca gluestack v1 que auxiliou e facilitou a criação do mesmo.
 
 
