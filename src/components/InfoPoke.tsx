@@ -7,7 +7,7 @@ import { Heading } from "@gluestack-ui/themed"
 import { ModalHeader } from "@gluestack-ui/themed"
 import { ModalBody, Text } from "@gluestack-ui/themed"
 import { useState } from "react"
-import { Touchable, TouchableOpacity } from "react-native"
+import { SafeAreaView, Touchable, TouchableOpacity } from "react-native"
 
 interface props{
     poke: object,
@@ -55,6 +55,7 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
 
   return (
 
+        
         <Modal
             isOpen={isModal}
             onClose={() => {
@@ -66,6 +67,8 @@ const InfoPoke = ({poke, isModal, setIsModal}: props) => {
                 
 
                 <ModalContent w={'100%'} h={'100%'} bgColor="#1E1E1E">
+
+                <SafeAreaView/>
 
                 <ModalHeader borderRadius={10}>
                     <ImageBackground source={require('../assets/fundoPoke.jpg')}  style={{ width: '100%', height: 300 }}  >
