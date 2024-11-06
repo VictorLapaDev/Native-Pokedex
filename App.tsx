@@ -3,7 +3,7 @@ import { config } from '@gluestack-ui/config';
 import { Box, FlatList, GluestackUIProvider, HStack, Image, Input, InputField, ScrollView, StatusBar, Text } from '@gluestack-ui/themed';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { ActivityIndicator, Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import CardPoke from './src/components/card';
 import PokeMenu from './src/components/PokeMenu';
 
@@ -49,6 +49,8 @@ export default function App() {
   return (
     <GluestackUIProvider config={config}>
 
+    <SafeAreaView/>
+    
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Box bgColor='$white'>
 
